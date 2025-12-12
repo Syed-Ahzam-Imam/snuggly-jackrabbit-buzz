@@ -21,7 +21,16 @@ app.include_router(admin.router)
 
 @app.get("/healthz")
 async def health_check():
-    is_connected = await check_db_connection()
+    is_connected, error = await check_db_connection()
+
     if is_connected:
-        return {"status": "ok", "db": "connected"}
-    return {"status": "error", "db": "disconnected"}
+        return {
+            "status": "ok",
+            "db": "connected"
+        }
+
+    return {
+        "status": "error",
+        "db": "disconnected",
+        "error": error
+    }
