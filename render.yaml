@@ -1,0 +1,43 @@
+services:
+  # Backend Service
+  - type: web
+    name: snuggly-jackrabbit-backend
+    env: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: MONGODB_URL
+        sync: false
+      - key: DATABASE_NAME
+        value: snuggly_jackrabbit_buzz
+      - key: SECRET_KEY
+        generateValue: true
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: MAIL_USERNAME
+        sync: false
+      - key: MAIL_PASSWORD
+        sync: false
+      - key: MAIL_FROM
+        sync: false
+      - key: ALLOWED_ORIGINS
+        value: "*" # Can be tightened to the frontend URL after deployment
+
+  # Frontend Service
+  - type: static
+    name: snuggly-jackrabbit-frontend
+    env: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    publishDir: dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+            type: web
+            name: snuggly-jackrabbit-backend
+            property: host

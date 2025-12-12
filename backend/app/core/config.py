@@ -1,11 +1,20 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from typing import List
+from typing import List, Union
+from pydantic import field_validator
 
 class Settings(BaseSettings):
     PROJECT_NAME: str = "Snuggly Jackrabbit Buzz"
     MONGODB_URL: str
     DATABASE_NAME: str = "snuggly_jackrabbit_buzz"
     ALLOWED_ORIGINS: List[str] = ["http://localhost:5173", "http://localhost:5137"]
+
+    @field_validator("ALLOWED_ORIGINS", mode="before")
+    @classmethod
+    def parse_allowed_origins(cls, v: Union[str, List[str]]) -> List[str]:
+        if isinstance(v, str) and not v.startswith("["):
+            return [i.strip() for i in v.split(",")]
+        return v
+
     SECRET_KEY: str
     GEMINI_API_KEY: str
     OPENROUTER_API_KEY: str
