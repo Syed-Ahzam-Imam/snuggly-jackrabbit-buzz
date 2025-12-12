@@ -6,6 +6,7 @@ import { MadeWithDyad } from '@/components/made-with-dyad';
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import jsPDF from 'jspdf';
+import { API_URL } from "@/config";
 
 interface AnalysisSection {
   title: string;
@@ -103,7 +104,7 @@ const ResultsPage: React.FC = () => {
       const formData = new FormData();
       formData.append("file", pdfBlob, "founder-clarity-report.pdf");
 
-      const response = await fetch(`http://localhost:8000/results/${resultId}/email`, {
+      const response = await fetch(`${API_URL}/results/${resultId}/email`, {
         method: "POST",
         body: formData,
       });
@@ -136,7 +137,7 @@ const ResultsPage: React.FC = () => {
       }
 
       try {
-        const response = await fetch(`http://localhost:8000/results/${resultId}`);
+        const response = await fetch(`${API_URL}/results/${resultId}`);
         if (!response.ok) {
           throw new Error("Failed to fetch results");
         }

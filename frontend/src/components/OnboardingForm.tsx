@@ -31,6 +31,7 @@ import {
 } from "@/components/ui/select";
 import { useNavigate } from "react-router-dom";
 import { showSuccess } from "@/utils/toast";
+import { API_URL } from "@/config";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -57,7 +58,7 @@ const OnboardingForm: React.FC = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const response = await fetch("http://localhost:8000/leads", {
+      const response = await fetch(`${API_URL}/leads`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

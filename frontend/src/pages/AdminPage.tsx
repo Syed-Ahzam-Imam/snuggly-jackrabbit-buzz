@@ -9,8 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-
-const API_URL = "http://localhost:8000";
+import { API_URL } from "@/config";
 
 interface AdminStats {
   total_leads: number;

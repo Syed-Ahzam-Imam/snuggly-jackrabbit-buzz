@@ -17,7 +17,7 @@ interface UserResponse {
   created_at: string;
 }
 
-const API_URL = "http://localhost:8000";
+import { API_URL } from "@/config";
 
 const ResponsesTable: React.FC = () => {
   const [responses, setResponses] = useState<UserResponse[]>([]);

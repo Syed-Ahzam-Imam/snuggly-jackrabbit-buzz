@@ -4,6 +4,7 @@ import React, { createContext, useContext, useState, ReactNode, useEffect } from
 import { diagnosticQuestions, Question } from "@/data/questions";
 import { showSuccess } from "@/utils/toast";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { API_URL } from "@/config";
 
 interface QuestionContextType {
   currentQuestionIndex: number;
@@ -42,7 +43,7 @@ export const QuestionProvider: React.FC<{ children: ReactNode }> = ({ children }
     }
 
     try {
-      const response = await fetch("http://localhost:8000/responses", {
+      const response = await fetch(`${API_URL}/responses`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
