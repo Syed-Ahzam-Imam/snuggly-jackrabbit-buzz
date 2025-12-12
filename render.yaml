@@ -26,18 +26,16 @@ services:
       - key: MAIL_FROM
         sync: false
       - key: ALLOWED_ORIGINS
-        value: "*" # Can be tightened to the frontend URL after deployment
+        value: "*"
 
-  # Frontend Service
-  - type: static
-    name: snuggly-jackrabbit-frontend
-    env: static
-    rootDir: frontend
+staticSites:
+  - name: snuggly-jackrabbit-frontend
     buildCommand: npm install && npm run build
     publishDir: dist
+    rootDir: frontend
     envVars:
       - key: VITE_API_URL
         fromService:
-            type: web
-            name: snuggly-jackrabbit-backend
-            property: host
+          type: web
+          name: snuggly-jackrabbit-backend
+          property: host
