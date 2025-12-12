@@ -1,5 +1,5 @@
 services:
-  # Backend Service
+  # Backend API
   - type: web
     name: snuggly-jackrabbit-backend
     env: python
@@ -28,11 +28,12 @@ services:
       - key: ALLOWED_ORIGINS
         value: "*"
 
-staticSites:
-  - name: snuggly-jackrabbit-frontend
+  # Frontend Static Site
+  - type: static
+    name: snuggly-jackrabbit-frontend
+    rootDir: frontend
     buildCommand: npm install && npm run build
     publishDir: dist
-    rootDir: frontend
     envVars:
       - key: VITE_API_URL
         fromService:
