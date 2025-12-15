@@ -11,3 +11,4 @@ email-validator
 google-genai
 openai
 fastapi-mail
+resend
