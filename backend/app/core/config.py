@@ -27,6 +27,10 @@ class Settings(BaseSettings):
     MAIL_PORT: int = 587
     MAIL_SERVER: str = "smtp.gmail.com"
     ALGORITHM: str = "HS256"
+    
+    # Resend setting
+    RESEND_API_KEY: str
+    RESEND_FROM_EMAIL: str
 
     model_config = SettingsConfigDict(env_file=".env")
 
