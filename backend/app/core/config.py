@@ -6,7 +6,7 @@ class Settings(BaseSettings):
     PROJECT_NAME: str = "Snuggly Jackrabbit Buzz"
     MONGODB_URL: str
     DATABASE_NAME: str = "snuggly_jackrabbit_buzz"
-    ALLOWED_ORIGINS: List[str] = ["http://localhost:5173", "http://localhost:5137", "https://snuggly-jackrabbit-buzz.onrender.com"]
+    ALLOWED_ORIGINS: List[str] = ["http://localhost:5173", "http://localhost:5137", "https://snuggly-jackrabbit-buzz-frontend.onrender.com"]
 
     @field_validator("ALLOWED_ORIGINS", mode="before")
     @classmethod
